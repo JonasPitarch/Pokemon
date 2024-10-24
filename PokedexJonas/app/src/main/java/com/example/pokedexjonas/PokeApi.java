@@ -1,7 +1,6 @@
 package com.example.pokedexjonas;
 
 import android.net.Uri;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,12 +13,10 @@ public class PokeApi {
 
     public static ArrayList<Pokemon> buscar() {
         ArrayList<Pokemon> pokemonList = new ArrayList<>();
-
-        // Construir la URL principal
         Uri builtUri = Uri.parse(apiurl)
                 .buildUpon()
                 .appendPath("pokemon")
-                .appendQueryParameter("limit", "20") // Límite de Pokémon obtenidos
+                .appendQueryParameter("limit", "151")
                 .build();
 
         String url = builtUri.toString();
@@ -38,24 +35,26 @@ public class PokeApi {
                     String name = pokemonJson.getString("name");
 
                     // Obtener la URL de detalles del Pokémon
-                    String detailsUrl = pokemonJson.getString("url");
+                    String det = pokemonJson.getString("url");
 
                     // Hacer otra llamada a la API para obtener más detalles del Pokémon
-                    String detailsResponse = doCall(detailsUrl);
+                    String detailsResponse = doCall(det);
                     if (detailsResponse != null) {
                         JSONObject detailsJson = new JSONObject(detailsResponse);
 
-                        // Verificar si el campo "sprites" existe y tiene la imagen
+                        // Obtener el ID del Pokémon desde detailsJson
+                        double id = detailsJson.getDouble("id");
+
+                        // Verificar si el campo de las imágenes existe y tiene la imagen
                         if (detailsJson.has("sprites")) {
                             JSONObject spritesJson = detailsJson.getJSONObject("sprites");
                             if (spritesJson.has("front_default")) {
                                 String imageUrl = spritesJson.getString("front_default");
 
-                                // Crear objeto Pokemon
                                 Pokemon pokemon = new Pokemon();
                                 pokemon.setName(name);
-                                pokemon.setSprite(imageUrl);
-
+                                pokemon.setSprite(imageUrl); // Establecer la URL de la imagen
+                                pokemon.setId(id); // Colocamos el id a la pokeapi
                                 // Añadir Pokémon a la lista
                                 pokemonList.add(pokemon);
                             } else {
@@ -76,6 +75,7 @@ public class PokeApi {
 
         return pokemonList;  // Devolver la lista de Pokémon
     }
+
     private static String doCall(String url) {
         try {
             return HttpUtils.get(url);

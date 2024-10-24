@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/pokeimagen"
-        android:layout_width="wrap_content"
-        android:layout_height="165dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -17,15 +18,28 @@
         android:id="@+id/Pokename"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/pokeimagen"
-        tools:layout_editor_absoluteY="25dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/PokeId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/pokeimagen"
+        app:layout_constraintTop_toBottomOf="@+id/Pokename"
+        android:textSize="14sp"
+        android:textColor="#888888" />
 
     <TextView
         android:id="@+id/pokedescrip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/Pokename"
-        app:layout_constraintStart_toStartOf="@+id/Pokename"
-        tools:layout_editor_absoluteY="70dp" />
+        app:layout_constraintStart_toEndOf="@+id/pokeimagen"
+        app:layout_constraintTop_toBottomOf="@+id/PokeId"
+        android:textSize="12sp"
+        android:textColor="#888888" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
