@@ -16,7 +16,7 @@ public class PokeApi {
         Uri builtUri = Uri.parse(apiurl)
                 .buildUpon()
                 .appendPath("pokemon")
-                .appendQueryParameter("limit", "151")
+                .appendQueryParameter("limit", "20")
                 .build();
 
         String url = builtUri.toString();

@@ -18,6 +18,7 @@ import java.util.concurrent.Executors;
 public class PokedexJonas extends Fragment {
 
     private FragmentFirstBinding binding;
+     PokemonViewModel model;
     ArrayList<String> pokemon;
     @Override
     public View onCreateView(
@@ -55,6 +56,9 @@ public class PokedexJonas extends Fragment {
         });
     }
 
+    private void reload(){
+        model.reload();
+    }
 
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.pokedexjonas;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,8 @@ public class PokemonAdapter extends BaseAdapter {
         Glide.with(context)
                 .load(pokemon.getSprite()) // URL de la imagen
                 .into(imageView); // ImageView donde se mostrará la imagen
+
+        Log.d("XXMX", "Error en el adapter");
 
         return convertView;
     }

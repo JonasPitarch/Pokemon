@@ -1,6 +1,11 @@
 package com.example.pokedexjonas;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Pokemon {
+    @PrimaryKey()
     private double id;
     private String name;
     private String species;
