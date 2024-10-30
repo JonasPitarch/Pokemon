@@ -18,7 +18,7 @@ public class PokemonViewModel extends AndroidViewModel {
     private final Application app;
     private final AppDatabase appDatabase;
     private final PokemonDao pokemonDao;
-    private LiveData<List<Pokemon>> movies;
+    private LiveData<List<Pokemon>> pokemon;
 
     public PokemonViewModel(Application application) {
         super(application);
@@ -29,7 +29,7 @@ public class PokemonViewModel extends AndroidViewModel {
         this.pokemonDao = appDatabase.getPokemonDao();
     }
 
-    public LiveData<List<Pokemon>> getMovies() {
+    public LiveData<List<Pokemon>> getPokemon() {
         return pokemonDao.getPokemons();
     }
 
@@ -43,5 +43,4 @@ public class PokemonViewModel extends AndroidViewModel {
 
         });
     }
-
 }

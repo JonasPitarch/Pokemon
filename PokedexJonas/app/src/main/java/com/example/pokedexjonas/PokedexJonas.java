@@ -25,10 +25,10 @@ public class PokedexJonas extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        pokemon = new ArrayList<>();
-        pokemon.add("andres");
-        pokemon.add("Iniesta");
-        pokemon.add("marcos");
+//        pokemon = new ArrayList<>();
+//        pokemon.add("andres");
+//        pokemon.add("Iniesta");
+//        pokemon.add("marcos");
 
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();

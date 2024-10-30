@@ -1,6 +1,7 @@
 package com.example.pokedexjonas;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,10 +57,16 @@ public class PokemonAdapter extends BaseAdapter {
                 .load(pokemon.getSprite()) // URL de la imagen
                 .into(imageView); // ImageView donde se mostrará la imagen
 
-        Log.d("XXMX", "Error en el adapter");
+        // Agregar OnClickListener para abrir la actividad de detalles del Pokémon
+        convertView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetallePokemon.class);
+            intent.putExtra("pokemonId", pokemon.getId()); // Pasar el ID del Pokémon
+            context.startActivity(intent);
+        });
 
         return convertView;
     }
 }
+
 
 
