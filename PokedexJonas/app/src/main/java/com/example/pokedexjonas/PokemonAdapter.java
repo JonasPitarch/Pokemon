@@ -67,6 +67,3 @@ public class PokemonAdapter extends BaseAdapter {
         return convertView;
     }
 }
-
-
-

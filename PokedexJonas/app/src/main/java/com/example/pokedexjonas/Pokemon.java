@@ -3,8 +3,10 @@ package com.example.pokedexjonas;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity
-public class Pokemon {
+public class Pokemon implements Serializable {
     @PrimaryKey()
     private double id;
     private String name;
