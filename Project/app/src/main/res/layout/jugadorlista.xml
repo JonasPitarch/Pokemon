@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/jugadorview"
+        android:layout_width="100dp"
+        android:layout_height="97dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/Jugadornombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/jugadorview"
+        tools:layout_editor_absoluteY="29dp" />
+
+    <TextView
+        android:id="@+id/Jugadorid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/Jugadornombre"
+        app:layout_constraintStart_toStartOf="@+id/Jugadornombre"
+        tools:layout_editor_absoluteY="59dp" />
+
+    <TextView
+        android:id="@+id/Jugadorposicion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/Jugadorid"
+        app:layout_constraintStart_toStartOf="@+id/Jugadorid"
+        tools:layout_editor_absoluteY="97dp" />
+
+    <TextView
+        android:id="@+id/jugadordorsal"
+        android:layout_width="57dp"
+        android:layout_height="14dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/Jugadorposicion"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/Jugadorposicion"
+        tools:layout_editor_absoluteY="132dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
