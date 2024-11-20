@@ -2,26 +2,33 @@ package com.example.project;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
 public interface JugadorDAO {
-    @Query("select * from Jugador")
-    LiveData<List<Jugador>> getJugador();
 
-    @Insert
-    void addJugador(Jugador jugador);
 
-    @Insert
+    void addJugador(ArrayList<Jugador> jugador);
+
     void addJugadors(List<Jugador> jugadors);
 
-    @Delete
-    void deletePJugador();
-
-    @Query("DELETE FROM jugador")
     void deletejugadors();
+
+    @Query("SELECT * FROM Jugador")
+    LiveData<List<Jugador>> getJugador();
+
+
+    @Insert
+    void addJugadors(Jugador jugador);
+
+
+    @Insert
+    void addJugador(List<Jugador> jugadores);
+
+    @Query("DELETE FROM Jugador")
+    void deleteJugador();
 }

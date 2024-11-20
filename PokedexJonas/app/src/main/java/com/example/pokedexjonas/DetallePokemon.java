@@ -17,13 +17,12 @@ import java.util.concurrent.Executors;
 
 public class DetallePokemon extends AppCompatActivity {
 
-    private static final ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private static ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detallespokemons);
-
         ImageView imageView = findViewById(R.id.ImagenPokemon);
         TextView nameTextView = findViewById(R.id.Pokename1);
         TextView descriptionTextView = findViewById(R.id.pokespecie2);
@@ -55,7 +54,6 @@ public class DetallePokemon extends AppCompatActivity {
             });
         } else {
             Log.d("DetallePokemon", "ID de Pokémon inválido.");
-            Toast.makeText(this, "ID de Pokémon inválido", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -18,7 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class JugadorAPI {
-    private static final String API_URL = "https://nbjiloroafjerluzdbtw.supabase.co/rest/v1/JugadoresNFL?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5iamlsb3JvYWZqZXJsdXpkYnR3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE1ODMwMjYsImV4cCI6MjA0NzE1OTAyNn0.8ew_Bf1mRT0K7dcABd3smpJtOQNCTjW9Mluf1YPBm2c";
+    private static final String API_URL = "";
 
     public static ArrayList<Jugador> buscar() {
         ArrayList<Jugador> jugadores = new ArrayList<>();
@@ -36,6 +36,7 @@ public class JugadorAPI {
                     String name = jugadorJson.optString("name");
                     String imageUrl = jugadorJson.optString("img");
                     int id = jugadorJson.optInt("id");
+                    int dorsal=jugadorJson.optInt("dorsal");
 
                     // Verificar y añadir a la lista
                     if (name != null && imageUrl != null && id != -1) {
@@ -43,6 +44,7 @@ public class JugadorAPI {
                         jugador.setNombre(name);
                         jugador.setImg(imageUrl);
                         jugador.setId(id);
+                        jugador.setDorsal(dorsal);
 
                         jugadores.add(jugador);
                     } else {

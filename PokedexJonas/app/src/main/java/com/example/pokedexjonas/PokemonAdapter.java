@@ -16,8 +16,8 @@ import com.example.pokedexjonas.Pokemon;
 import java.util.ArrayList;
 
 public class PokemonAdapter extends BaseAdapter {
-    private final Context context;
-    private final ArrayList<Pokemon> pokemonList;
+    private  Context context;
+    private  ArrayList<Pokemon> pokemonList;
 
     public PokemonAdapter(Context context, ArrayList<Pokemon> pokemonList) {
         this.context = context;

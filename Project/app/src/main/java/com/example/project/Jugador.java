@@ -6,8 +6,10 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
 @Entity
-public class Jugador implements Serializable {
+public class Jugador extends ArrayList<Jugador> implements Serializable {
     @PrimaryKey(autoGenerate = true)
     int id;
     String nombre;

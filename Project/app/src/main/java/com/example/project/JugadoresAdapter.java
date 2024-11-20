@@ -51,15 +51,17 @@ public class JugadoresAdapter {
         Glide.with(context)
                 .load(jugador.getImg()) // URL de la imagen
                 .into(imageView); // ImageView donde se mostrará la imagen
-        dorsalTextView.setText(jugador.get);
+        dorsalTextView.setText(jugador.getDorsal());
 
-        // Agregar OnClickListener para abrir la actividad de detalles del Pokémon
+        // Agregar OnClickListener para abrir la actividad de detalles del Jugador
         convertView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetallesJugador.class);
-            intent.putExtra("pokemonId", jugador.getId()); // Pasar el ID del Pokémon
+            intent.putExtra("pokemonId", jugador.getId()); // Pasar el ID del Jugador
             context.startActivity(intent);
         });
 
         return convertView;
     }
+
+
 }
