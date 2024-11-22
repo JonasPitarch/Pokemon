@@ -1,13 +1,19 @@
-package com.example.jugadorapi;
+package com.example.finalprojectt1;
 
-import java.io.Serializable;
-
-public class Jugador implements Serializable {
+public class Jugadores {
     int id;
     String nombre;
     String img;
     String posicion;
     int dorsal;
+
+    public Jugadores(int id, String nombre, String img, String posicion, int dorsal) {
+        this.id = id;
+        this.nombre = nombre;
+        this.img = img;
+        this.posicion = posicion;
+        this.dorsal = dorsal;
+    }
 
     public int getId() {
         return id;
@@ -47,16 +53,5 @@ public class Jugador implements Serializable {
 
     public void setDorsal(int dorsal) {
         this.dorsal = dorsal;
-    }
-
-    @Override
-    public String toString() {
-        return "Jugador{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", img='" + img + '\'' +
-                ", posicion='" + posicion + '\'' +
-                ", dorsal=" + dorsal +
-                '}';
     }
 }
