@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -12,8 +13,9 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.finalprojectt1.databinding.FragmentFirstBinding;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class FirstFragment extends Fragment {
 
@@ -21,37 +23,63 @@ public class FirstFragment extends Fragment {
     private ArrayList<Jugadores> jugadores;
     private JugadorAdapter adapter;
 
-
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
+    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         jugadores = new ArrayList<>();
-        adapter=new JugadorAdapter(getContext(),jugadores);
+        adapter = new JugadorAdapter(getContext(), jugadores);
         binding.listaJugadores.setAdapter(adapter);
 
-        binding.listaJugadores.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        binding.listaJugadores.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Jugadores jugadorseleccionado = (Jugadores) parent.getItemAtPosition(position);
+                Jugadores jugadorSeleccionado = (Jugadores) parent.getItemAtPosition(position);
                 Bundle args = new Bundle();
-                args.putSerializable("jugadorseleccionado", (Serializable) jugadorseleccionado);
+                args.putSerializable("jugadorseleccionado", jugadorSeleccionado); // Asegúrate de usar Serializable
 
-                // Navega al SecondFragment con los datos
+                // Navega al SecondFragment con los datos del jugador
                 NavHostFragment.findNavController(FirstFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment, args);
             }
         });
 
+        // Inicia la carga de jugadores, pasando un rango de IDs
+        cargarJugadores(1, 20); // Ejemplo con 10 jugadores
+    }
+
+    private void cargarJugadores(int id, int maxId) {
+        if (id > maxId) {
+            // Cuando se han generado todos los jugadores, muestra un mensaje
+            Toast.makeText(getContext(), "Generación completada", Toast.LENGTH_SHORT).show();
+        } else {
+            MetodosJugador metodosJugador = new MetodosJugador();
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+
+            executor.execute(() -> {
+                metodosJugador.getJugador(id, jugador -> {
+                    if (jugador != null) {
+                        // Si el jugador se encuentra, añadirlo a la lista
+                        getActivity().runOnUiThread(() -> {
+                            jugadores.add(jugador);
+                            adapter.notifyDataSetChanged();
+                        });
+
+                        // Llamar recursivamente para obtener el siguiente jugador
+                        cargarJugadores(id + 1, maxId);
+                    }
+                });
+            });
+        }
     }
 
     @Override
@@ -59,5 +87,4 @@ public class FirstFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
 }

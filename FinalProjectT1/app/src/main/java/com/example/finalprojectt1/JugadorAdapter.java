@@ -1,19 +1,16 @@
 package com.example.finalprojectt1;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-import java.util.TreeMap;
 
 public class JugadorAdapter extends BaseAdapter {
     private Context context;
@@ -23,7 +20,6 @@ public class JugadorAdapter extends BaseAdapter {
         this.context = context;
         this.jugadores = jugadores;
     }
-
 
     @Override
     public int getCount() {
@@ -42,26 +38,26 @@ public class JugadorAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-      if (convertView == null){
-          convertView = LayoutInflater.from(context).inflate(R.layout.listadojugador,parent);
-      }
-      Jugadores jugador = jugadores.get(position);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.listadojugador, parent, false);
+        }
 
-      TextView idTextView=convertView.findViewById(R.id.idp);
-      TextView nombreTextView= convertView.findViewById(R.id.nombrep);
-      TextView dorsalTextView=convertView.findViewById(R.id.dorp);
-      TextView posicionTextView= convertView.findViewById(R.id.posp);
-      ImageView imageView=convertView.findViewById(R.id.iamgenp);
+        Jugadores jugador = jugadores.get(position);
 
-      idTextView.setText(jugador.getId());
-      nombreTextView.setText(jugador.getNombre());
-      dorsalTextView.setText(jugador.getDorsal());
-      posicionTextView.setText(jugador.getDorsal());
+        TextView nombreTextView = convertView.findViewById(R.id.nombrep);
+        TextView dorsalTextView = convertView.findViewById(R.id.dorp);
+        TextView posicionTextView = convertView.findViewById(R.id.posp);
+        ImageView imageView = convertView.findViewById(R.id.iamgenp);
 
-        Glide.with(context).
-                load(jugador.getImg()) //sacara al URL de la imagen
-                .into(imageView);//donde se pondra la imagen
+        nombreTextView.setText(jugador.getNombre());
+        dorsalTextView.setText(String.valueOf(jugador.getDorsal()));
+        posicionTextView.setText(jugador.getPosicion());
 
-      return convertView;
+        // Cargar la imagen con Glide
+        Glide.with(context)
+                .load(jugador.getImg())
+                .into(imageView);
+
+        return convertView;
     }
 }

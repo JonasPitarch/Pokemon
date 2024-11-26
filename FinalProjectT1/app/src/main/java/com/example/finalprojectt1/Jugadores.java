@@ -1,20 +1,15 @@
 package com.example.finalprojectt1;
 
-public class Jugadores {
-    int id;
-    String nombre;
-    String img;
-    String posicion;
-    int dorsal;
+import java.io.Serializable;
 
-    public Jugadores(int id, String nombre, String img, String posicion, int dorsal) {
-        this.id = id;
-        this.nombre = nombre;
-        this.img = img;
-        this.posicion = posicion;
-        this.dorsal = dorsal;
-    }
+public class Jugadores implements Serializable {
+    private int id;
+    private String nombre;
+    private int dorsal;
+    private String posicion;
+    private String img;
 
+    // Getters y setters para cada propiedad
     public int getId() {
         return id;
     }
@@ -31,12 +26,12 @@ public class Jugadores {
         this.nombre = nombre;
     }
 
-    public String getImg() {
-        return img;
+    public int getDorsal() {
+        return dorsal;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setDorsal(int dorsal) {
+        this.dorsal = dorsal;
     }
 
     public String getPosicion() {
@@ -47,11 +42,11 @@ public class Jugadores {
         this.posicion = posicion;
     }
 
-    public int getDorsal() {
-        return dorsal;
+    public String getImg() {
+        return img;
     }
 
-    public void setDorsal(int dorsal) {
-        this.dorsal = dorsal;
+    public void setImg(String img) {
+        this.img = img;
     }
 }

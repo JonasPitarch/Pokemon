@@ -8,5 +8,5 @@ import retrofit2.http.Query;
 
 public interface JugadorApi {
     @GET("JugadoresNFL")
-    Call<List<Jugadores>>getJugador(@Query("id")String id, @Query("apikey") String apikey);
+    Call<List<Jugadores>> getJugador(@Query("id") String id, @Query("apikey") String apikey);
 }
