@@ -9,7 +9,6 @@ public class Jugadores implements Serializable {
     private String posicion;
     private String img;
 
-    // Getters y setters para cada propiedad
     public int getId() {
         return id;
     }

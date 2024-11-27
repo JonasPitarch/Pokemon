@@ -13,8 +13,8 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 public class JugadorAdapter extends BaseAdapter {
-    private Context context;
-    private ArrayList<Jugadores> jugadores;
+    private final Context context;
+    private final ArrayList<Jugadores> jugadores;
 
     public JugadorAdapter(Context context, ArrayList<Jugadores> jugadores) {
         this.context = context;
@@ -53,7 +53,6 @@ public class JugadorAdapter extends BaseAdapter {
         dorsalTextView.setText(String.valueOf(jugador.getDorsal()));
         posicionTextView.setText(jugador.getPosicion());
 
-        // Cargar la imagen con Glide
         Glide.with(context)
                 .load(jugador.getImg())
                 .into(imageView);

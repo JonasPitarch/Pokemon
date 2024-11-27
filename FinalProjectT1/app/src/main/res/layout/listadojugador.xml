@@ -1,57 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="8dp">
 
     <ImageView
         android:id="@+id/iamgenp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="8dp"
+        android:contentDescription="@string/app_name" />
 
-    <TextView
-        android:id="@+id/idp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iamgenp"
-        tools:layout_editor_absoluteY="37dp"
-        tools:ignore="MissingConstraints" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/nombrep"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/idp"
-        app:layout_constraintStart_toStartOf="@+id/idp"
-        tools:layout_editor_absoluteY="64dp"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/nombrep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre" />
 
-    <TextView
-        android:id="@+id/posp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/nombrep"
-        app:layout_constraintStart_toStartOf="@+id/nombrep"
-        tools:layout_editor_absoluteY="94dp"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/dorp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dorsal" />
 
-    <TextView
-        android:id="@+id/dorp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/posp"
-        app:layout_constraintStart_toStartOf="@+id/posp"
-        tools:layout_editor_absoluteY="126dp"
-        tools:ignore="MissingConstraints" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/posp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Posición" />
+    </LinearLayout>
+</LinearLayout>
