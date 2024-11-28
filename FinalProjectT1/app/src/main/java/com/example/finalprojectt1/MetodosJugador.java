@@ -24,23 +24,32 @@ public class MetodosJugador {
     }
 
     public void getJugador(int id, Consumer<Jugadores> callback) {
+        // Crea una instancia de la interfaz LlamaApi a través de Retrofit.
         LlamaApi api = retrofit.create(LlamaApi.class);
-        // Construimos la URL de consulta correcta para buscar por ID
-        String idFilter = "eq." + id;  // Para obtener el jugador con ese ID
 
-        // Pasamos la clave API en los encabezados HTTP
+        // Construimos el filtro de búsqueda para obtener el jugador con el ID especificado.
+        String idFilter = "eq." + id; // 'eq.' se usa para crear un filtro de igualdad en la consulta.
+
+        // Crea una llamada a la API usando el método definido en LlamaApi, pasando el filtro de ID y la clave de la API.
         Call<List<Jugadores>> llamada = api.getJugador(idFilter, API_KEY);
 
+        // Encola la llamada de manera asíncrona para no bloquear el hilo principal.
         llamada.enqueue(new Callback<List<Jugadores>>() {
+
             @Override
             public void onResponse(Call<List<Jugadores>> call, Response<List<Jugadores>> response) {
+                // Log para depurar la respuesta HTTP.
                 Log.d("API_RESPONSE", "Código de respuesta: " + response.code());
                 Log.d("API_RESPONSE", "Cuerpo de respuesta: " + response.body());
 
+                // Verifica si la respuesta es exitosa, tiene cuerpo y no está vacía.
                 if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                    // Obtiene el primer jugador de la lista de resultados.
                     Jugadores jugador = response.body().get(0);
+                    // Llama al callback pasando el jugador obtenido.
                     callback.accept(jugador);
                 } else {
+                    // Si no se encontraron datos, registra un error y pasa null al callback.
                     Log.e("API_ERROR", "No se encontraron jugadores para el ID: " + id);
                     callback.accept(null);
                 }
@@ -48,10 +57,13 @@ public class MetodosJugador {
 
             @Override
             public void onFailure(Call<List<Jugadores>> call, Throwable t) {
+                // Si ocurre un error en la llamada a la API, se registra en el log.
                 Log.e("API_ERROR", "Error al llamar a la API: " + t.getMessage());
                 t.printStackTrace();
+                // Llama al callback con null para indicar el fallo.
                 callback.accept(null);
             }
         });
     }
+
 }

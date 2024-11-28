@@ -1,38 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
-
-    <ImageView
-        android:id="@+id/iamgenp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginRight="8dp"
-        android:contentDescription="@string/app_name" />
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    android:layout_margin="8dp"
+    android:padding="16dp">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="8dp">
 
-        <TextView
-            android:id="@+id/nombrep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nombre" />
+        <!-- Imagen del jugador (con borde redondeado y máscara) -->
+        <ImageView
+            android:id="@+id/iamgenp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="16dp"
 
-        <TextView
-            android:id="@+id/dorp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dorsal" />
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+            />
 
-        <TextView
-            android:id="@+id/posp"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Posición" />
+            android:layout_weight="1"
+            android:paddingStart="8dp">
+
+            <!-- Nombre del jugador -->
+            <TextView
+                android:id="@+id/nombrep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre del Jugador"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="bold" />
+
+            <!-- Dorsal -->
+            <TextView
+                android:id="@+id/dorp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif-light"
+                android:text="Dorsal: "
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <!-- Posición -->
+            <TextView
+                android:id="@+id/posp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif-light"
+                android:text="Posición: "
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</androidx.cardview.widget.CardView>

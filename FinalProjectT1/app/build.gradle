@@ -49,4 +49,21 @@ dependencies {
     //implementacion del GLide
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+
+    dependencies {
+        // Dependencias de Room
+        def room_version = "2.6.0"  // Usa la última versión disponible
+
+        implementation "androidx.room:room-runtime:$room_version"
+        annotationProcessor "androidx.room:room-compiler:$room_version" // Para usar Room con Java
+
+
+        // Room para soporte de RxJava, si lo necesitas
+        implementation "androidx.room:room-rxjava2:$room_version" // RxJava 2.x
+        implementation "androidx.room:room-rxjava3:$room_version" // RxJava 3.x
+
+        // Para migraciones de Room
+        implementation "androidx.room:room-paging:$room_version"
+    }
+
 }
