@@ -6,7 +6,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -28,10 +27,10 @@ public class MetodosJugador {
         LlamaApi api = retrofit.create(LlamaApi.class);
 
         // Construimos el filtro de búsqueda para obtener el jugador con el ID especificado.
-        String idFilter = "eq." + id; // 'eq.' se usa para crear un filtro de igualdad en la consulta.
+        String filtro = "eq." + id; // 'eq.' se usa para crear un filtro de igualdad en la consulta.
 
         // Crea una llamada a la API usando el método definido en LlamaApi, pasando el filtro de ID y la clave de la API.
-        Call<List<Jugadores>> llamada = api.getJugador(idFilter, API_KEY);
+        Call<List<Jugadores>> llamada = api.getJugador(filtro, API_KEY);
 
         // Encola la llamada de manera asíncrona para no bloquear el hilo principal.
         llamada.enqueue(new Callback<List<Jugadores>>() {

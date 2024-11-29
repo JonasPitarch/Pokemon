@@ -42,10 +42,8 @@ public class JugadorAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.listadojugador, parent, false);
         }
-
         // Obtiene el jugador correspondiente a la posición actual de la lista
         Jugadores jugador = jugadores.get(position);
-
         // Encuentra las vistas dentro del diseño inflado que se usarán para mostrar la información del jugador
         TextView nombreTextView = convertView.findViewById(R.id.nombrep); // TextView para el nombre del jugador
         TextView dorsalTextView = convertView.findViewById(R.id.dorp);    // TextView para el dorsal del jugador

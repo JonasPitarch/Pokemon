@@ -58,14 +58,11 @@ public class FirstFragment extends Fragment {
 
         // Carga los jugadores desde la base de datos local
         cargarJugadoresDesdeDB();
-
         // Llama a la API si la base de datos está vacía
         verificaryactualizardesdedb();
     }
 
-
 //      Carga jugadores desde la base de datos local.
-
     private void cargarJugadoresDesdeDB() {
         db.getJugadorDAO().getJugador().observe(getViewLifecycleOwner(), new Observer<List<Jugadores>>() {
             @Override
@@ -76,10 +73,7 @@ public class FirstFragment extends Fragment {
             }
         });
     }
-
-
 //     Verifica si la base de datos está vacía y, de ser así, descarga jugadores desde la API.
-
     private void verificaryactualizardesdedb() {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
