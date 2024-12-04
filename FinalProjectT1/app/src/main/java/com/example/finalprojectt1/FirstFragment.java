@@ -21,9 +21,9 @@ import java.util.concurrent.Executors;
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
-    private ArrayList<Jugadores> jugadores; // Lista que maneja el adaptador
+    private ArrayList<Jugadores> jugadores;
     private JugadorAdapter adapter;
-    private AppDatabase db; // Instancia de la base de datos
+    private AppDatabase db;
 
     @Override
     public View onCreateView(
@@ -38,7 +38,6 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Inicializa la base de datos
         db = AppDatabase.getDatabase(getContext());
 
         // Configura la lista de jugadores y el adaptador
@@ -79,8 +78,7 @@ public class FirstFragment extends Fragment {
         executor.execute(() -> {
             int count = db.getJugadorDAO().getCount(); // Obtiene el número de jugadores en la base de datos
             if (count == 0) {
-                // Si la base de datos está vacía, carga los jugadores desde la API
-                cargarJugadoresDesdeAPI(1, 24);
+                cargarJugadoresDesdeAPI(1, 20);// carga los jugadores desde la Api en la BDD
             }
         });
     }
@@ -92,12 +90,12 @@ public class FirstFragment extends Fragment {
             );
         } else {
             MetodosJugador metodosJugador = new MetodosJugador();
-            ExecutorService executor = Executors.newSingleThreadExecutor(); // Crea un hilo secundario para la operación
+            ExecutorService executor = Executors.newSingleThreadExecutor();
 
             executor.execute(() -> {
                 metodosJugador.getJugador(id, jugador -> {
                     if (jugador != null) {
-                        // Guarda el jugador en la base de datos en un hilo de fondo
+                        // Guarda el jugador en la base de datos
                         executor.execute(() -> db.getJugadorDAO().addJugador(jugador));
                     }
                     cargarJugadoresDesdeAPI(id + 1, maxId); // Llamada recursiva

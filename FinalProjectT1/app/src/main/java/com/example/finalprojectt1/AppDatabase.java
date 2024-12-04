@@ -8,9 +8,7 @@ import androidx.room.RoomDatabase;
 
 @Database(entities = {Jugadores.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
-
     private static AppDatabase INSTANCE;
-
     public static AppDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE =
@@ -21,6 +19,5 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
-
     public abstract JugadorDAO getJugadorDAO();
 }
