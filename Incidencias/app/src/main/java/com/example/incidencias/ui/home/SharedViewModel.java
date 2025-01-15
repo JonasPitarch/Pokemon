@@ -19,6 +19,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseUser;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,6 +36,11 @@ public class SharedViewModel extends AndroidViewModel {
     private final MutableLiveData<Boolean> progressBar = new MutableLiveData<>();
     private MutableLiveData<FirebaseUser> user = new MutableLiveData<>();;
 
+    private final MutableLiveData <LatLng> currentLatLng = new MutableLiveData<>();
+
+    public MutableLiveData<LatLng> getCurrentLatLng() {
+        return currentLatLng;
+    }
     public LiveData<FirebaseUser> getUser() {
         return user;
     }
@@ -136,6 +142,9 @@ public class SharedViewModel extends AndroidViewModel {
             String resultMessage = "";
 
             try {
+                LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
+                currentLatLng.postValue(latlng);
+
                 addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 
 

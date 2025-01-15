@@ -77,25 +77,9 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    void checkPermission() {
-        Log.d("PERMISSIONS", "Check permisssions");
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            Log.d("PERMISSIONS", "Request permisssions");
-            locationPermissionRequest.launch(new String[]{
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-            });
-        } else {
-            sharedViewModel.startTrackingLocation(false);
-        }
-    }
     @Override
     protected void onStart() {
         super.onStart();
-
         FirebaseAuth auth = FirebaseAuth.getInstance();
         Log.e("XXXX", String.valueOf(auth.getCurrentUser()));
         if (auth.getCurrentUser() == null) {
@@ -115,4 +99,21 @@ public class MainActivity extends AppCompatActivity {
             sharedViewModel.setUser(auth.getCurrentUser());
         }
     }
+
+    void checkPermission() {
+        Log.d("PERMISSIONS", "Check permisssions");
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            Log.d("PERMISSIONS", "Request permisssions");
+            locationPermissionRequest.launch(new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+            });
+        } else {
+            sharedViewModel.startTrackingLocation(false);
+        }
+    }
+
 }

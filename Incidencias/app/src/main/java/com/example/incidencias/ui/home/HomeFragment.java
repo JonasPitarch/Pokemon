@@ -27,6 +27,8 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,7 @@ public class HomeFragment extends Fragment {
     private FusedLocationProviderClient mFusedLocationClient;
     private boolean mTrackingLocation;
     private LocationCallback mLocationCallback;
+    private FirebaseUser authUser;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         SharedViewModel homeViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
@@ -49,43 +52,34 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
+        SharedViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
-        locationPermissionRequest = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
-            Boolean fineLocationGranted = result.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false);
-            Boolean coarseLocationGranted = result.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false);
-            if (fineLocationGranted != null && fineLocationGranted) {
-                startTrackingLocation();
-            } else if (coarseLocationGranted != null && coarseLocationGranted) {
-                startTrackingLocation();
-            } else {
-                Toast.makeText(requireContext(), "No concedeixen permisos", Toast.LENGTH_SHORT).show();
-            }
+        SharedViewModel.getCurrentAddress().observe(getViewLifecycleOwner(), address -> {
+            binding.txtDireccio.setText(String.format(
+                    "Direcció: %1$s \n Hora: %2$tr",
+                    address, System.currentTimeMillis())
+            );
+        });
+        sharedViewModel.getCurrentLatLng().observe(getViewLifecycleOwner(), latlng -> {
+            binding.txtLatitud.setText(String.valueOf(latlng.latitude));
+            binding.txtLongitud.setText(String.valueOf(latlng.longitude));
         });
 
-        mLocationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                if (locationResult != null) {
-                    fetchAddress(locationResult.getLastLocation());
-                } else {
-                    binding.localitzacio.setText("Sense localització coneguda");
-                }
-            }
-        };
+        sharedViewModel.getProgressBar().observe(getViewLifecycleOwner(), visible -> {
+            if (visible)
+                binding.txtDireccio.setVisibility(ProgressBar.VISIBLE);
+            else
+                binding.txtDireccio.setVisibility(ProgressBar.INVISIBLE);
+        });
 
-        binding.buttonLocation.setOnClickListener(view -> {
-            Toast.makeText(requireContext(), "Clicked Get Location", Toast.LENGTH_SHORT).show();
-            if (!mTrackingLocation) {
-                startTrackingLocation();
-            } else {
-                stopTrackingLocation();
-            }
+        sharedViewModel.switchTrackingLocation();
+
+        sharedViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
+            authUser = user;
         });
 
         return root;
     }
-
     private void startTrackingLocation() {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(requireContext(), "Request permisssions", Toast.LENGTH_SHORT).show();
@@ -94,10 +88,10 @@ public class HomeFragment extends Fragment {
             Toast.makeText(requireContext(), "getLocation: permissions granted", Toast.LENGTH_SHORT).show();
             mFusedLocationClient.requestLocationUpdates(getLocationRequest(), mLocationCallback, null);
         }
-        binding.localitzacio.setText("Carregant...");
-        binding.localitzacio.setVisibility(ProgressBar.VISIBLE);
+        binding.buttonNotificar.setText("Carregant...");
+        binding.loading.setVisibility(ProgressBar.VISIBLE);
         mTrackingLocation = true;
-        binding.buttonLocation.setText("Aturar el seguiment de la ubicació");
+        binding.buttonNotificar.setText("Aturar el seguiment de la ubicació");
     }
 
     private LocationRequest getLocationRequest() {
@@ -110,9 +104,9 @@ public class HomeFragment extends Fragment {
 
     private void stopTrackingLocation() {
         if (mTrackingLocation) {
-            binding.localitzacio.setVisibility(ProgressBar.INVISIBLE);
+            binding.loading.setVisibility(ProgressBar.INVISIBLE);
             mTrackingLocation = false;
-            binding.buttonLocation.setText("Comença a seguir la ubicació");
+            binding.buttonNotificar.setText("Comença a seguir la ubicació");
             mFusedLocationClient.removeLocationUpdates(mLocationCallback);
         }
     }
@@ -149,7 +143,7 @@ public class HomeFragment extends Fragment {
                     String finalResultMessage = resultMessage;
                     handler.post(() -> {
                         if (mTrackingLocation)
-                            binding.localitzacio.setText(String.format("Direcció: %1$s \n Hora: %2$tr", finalResultMessage, System.currentTimeMillis()));
+                            binding.txtDireccio.setText(String.format("Direcció: %1$s \n Hora: %2$tr", finalResultMessage, System.currentTimeMillis()));
                     });
                 }
 
