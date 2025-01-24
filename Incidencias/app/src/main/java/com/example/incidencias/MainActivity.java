@@ -75,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
                         sharedViewModel.setUser(user);
                     }
                 });
+
+
+
     }
 
     @Override

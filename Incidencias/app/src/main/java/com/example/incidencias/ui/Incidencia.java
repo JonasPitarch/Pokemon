@@ -1,4 +1,4 @@
-package com.example.carlesgm.incivisme;
+package com.example.incidencias.ui;
 
 public class Incidencia {
     String latitud;
